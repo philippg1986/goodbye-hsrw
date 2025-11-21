@@ -1,8 +1,7 @@
-# Philipp Karriere-Simulator in PowerShell
+﻿# Philipp Karriere-Simulator – Windows PowerShell 5.x kompatibel
 
 Clear-Host
 
-# Initialisierung
 $philipp = @{
     Name = "Philipp"
     Role = ""
@@ -38,81 +37,63 @@ function Face-Challenge {
 
 function Make-Decision {
     param($Person, $Options, $Year)
-    Write-Host "`n`n❓ Entscheidung erforderlich: $Options"
-    Start-Sleep -Seconds 3
+    Write-Host "❓ Entscheidung erforderlich: $Options"
+    Start-Sleep -Seconds 1
     if ($Year -eq 3 -and $Options -contains "Technik") {
         $choice = "Technik"
     } else {
         $choice = Get-Random -InputObject $Options
     }
-    Write-Host "`n`n✅ $($Person.Name) entscheidet sich für: $choice"
-    Start-Sleep -Seconds 3
+    Write-Host "✅ $($Person.Name) entscheidet sich für: $choice"
+    Start-Sleep -Seconds 1
     return $choice
 }
 
 function Receive-Gift {
     param($Person, $Gift, $Occasion="Abschiedsgeschenk")
-    Write-Host "`n`n🎁 $($Person.Name) erhält ein $Occasion" -NoNewline
-    Write-Host ": $Gift"
+    Write-Host "$($Person.Name) erhält ein $($Occasion): $($Gift)"
     $Person.Gifts += $Gift
-    Start-Sleep -Seconds 4
+    Start-Sleep -Seconds 1
 }
 
 function Farewell {
     param($Person)
-
     $width = $Host.UI.RawUI.BufferSize.Width
 
-    $text = @"
-Hallo Zusammen,
+    $text = "Hallo Zusammen," + "`n`n" +
+"wie ihr alle wisst, endet meine Zeit an der Hochschule nach etwas mehr als drei Jahren zum 30.11.2025." + "`n" +
+"Man sagt ja: ""Zeit vergeht schneller, wenn man Spaß hat... (oder wenn ständig etwas Unerwartetes kaputt geht)."" In diesem Sinne: Die Jahre sind verflogen ;-)" + "`n`n" +
+"Die Aufgabe als Abteilungsleiter war für mich eine neue und spannende Rolle. Mit der Zeit habe ich jedoch festgestellt, dass die Technik sich nicht damit zufriedengibt, ""nebenbei"" mitzulaufen, sondern täglich laut und deutlich Aufmerksamkeit einfordert. Dadurch blieb für die eigentliche Führungsarbeit weniger Raum, als ich mir gewünscht hätte. Am Ende musste ich mich entscheiden: Technik oder Führung? - Surprise: Die Technik hat gewonnen." + "`n`n" +
+"Deshalb werde ich in die Wirtschaft zurückkehren und künftig wieder als Senior IT-Administrator arbeiten." + "`n`n" +
+"Ich möchte mich außerdem herzlich für den Gutschein bedanken, über den ich mich - auch wenn ich ausdrücklich darum gebeten hatte, nichts zu sammeln (aber wann hat das jemals funktioniert) - wirklich sehr gefreut habe. Das Eckregal, das daraus entstanden ist, hilft mir nun dabei, zumindest den Eindruck von Ordnung zu vermitteln." + "`n" +
+"Man nimmt, was man kriegen kann." + "`n`n" +
+"Es war eine spannende Zeit mit euch, und ich habe die Zusammenarbeit trotz gelegentlicher kleiner IT-Katastrophen wirklich geschätzt. Ich wünsche euch stabile Systeme, kurze Ticketqueues und möglichst wenig ""kannst du mal eben kurz...""" + "`n`n" +
+"Bis dahin und alles Gute!" + "`n`n" +
+"Philipp"
 
-wie ihr alle wisst, endet meine Zeit an der Hochschule nach etwas mehr als drei Jahren zum 30.11.2025.
-Man sagt ja: „Zeit vergeht schneller, wenn man Spaß hat… (oder wenn ständig irgendetwas Unerwartetes kaputt geht).“ In diesem Sinne: Die Jahre sind verflogen ;-)
-
-Die Aufgabe als Abteilungsleiter war für mich eine neue und spannende Rolle. Mit der Zeit habe ich jedoch festgestellt, dass die Technik sich nicht damit zufriedengibt, „nebenbei“ mitzulaufen, sondern täglich laut und deutlich Aufmerksamkeit einfordert. Dadurch blieb für die eigentliche Führungsarbeit weniger Raum, als ich mir gewünscht hätte. Am Ende musste ich mich entscheiden: Technik oder Führung? - Surprise: Die Technik hat gewonnen.
-Deshalb werde ich in die Wirtschaft zurückkehren und künftig wieder als Senior IT-Administrator arbeiten.
-
-Ich möchte mich außerdem herzlich für den Gutschein bedanken, über den ich mich - auch wenn ich ausdrücklich darum gebeten hatte, nichts zu sammeln (aber wann hat das jemals funktioniert) - wirklich sehr gefreut habe. Das Eckregal, das daraus entstanden ist, hilft mir nun dabei, zumindest den Eindruck von Ordnung zu vermitteln.
-Man nimmt, was man kriegen kann.
-
-Es war eine spannende Zeit mit euch, und ich habe die Zusammenarbeit trotz gelegentlicher kleiner IT-Katastrophen wirklich geschätzt. Ich wünsche euch stabile Systeme, kurze Ticketqueues und möglichst wenig „kannst du mal eben kurz…“.
-
-Bis dahin und alles Gute!
-
-Philipp
-"@
-
-    # Text in Absätze splitten
     $paragraphs = $text -split "`n`n"
-
     foreach ($para in $paragraphs) {
         $words = $para -split " "
         $line = ""
         foreach ($word in $words) {
             if (($line.Length + $word.Length + 1) -lt $width) {
-                if ($line -eq "") {
-                    $line = $word
-                } else {
-                    $line += " " + $word
-                }
+                if ($line -eq "") { $line = $word } else { $line += " " + $word }
             } else {
                 Write-Host $line
                 $line = $word
             }
         }
         if ($line -ne "") { Write-Host $line }
-        Write-Host ""  # Leerzeile zwischen Absätzen
+        Write-Host ""
     }
 
-    # Geschenke und Rollenhistorie
     Write-Host "Gesammelte Geschenke: $($Person.Gifts -join ', ')"
     Write-Host "Rollenhistorie: $($Person.History -join ', ')"
 }
 
-
 function Simulate-Career {
     param($Person, $Years)
-    Write-Host "🎓 Karriere-Simulation für $($Person.Name) ($Years Jahre)"
+    Write-Host "[Karriere-Simulation] für $($Person.Name) " + $Years + " Jahre"
     Start-Sleep -Seconds 1
 
     Assign-Role -Person $Person -Role "Abteilungsleiter"
@@ -136,5 +117,4 @@ function Simulate-Career {
     Farewell -Person $Person
 }
 
-# Simulation starten
 Simulate-Career -Person $philipp -Years 3
