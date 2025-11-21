@@ -1,7 +1,7 @@
-# Philipp Karriere-Simulator – PowerShell
+# Philipp sagt Tschüss!
 
 Dieses PowerShell-Skript simuliert auf unterhaltsame Weise die **Karriere von Philipp an der Hochschule** über drei Jahre.  
-Es enthält Herausforderungen aus dem Netzwerk- und Rechenzentrumsbetrieb, Entscheidungen zwischen Führung und Technik und endet mit einem persönlichen Abschiedstext inklusive eines Abschiedsgeschenks.
+Es enthält Herausforderungen aus dem Netzwerk- und Rechenzentrumsbetrieb, die Entscheidung zwischen Führung und Technik und endet mit einem persönlichen Abschiedstext inklusive eines Abschiedsgeschenks.
 
 ## Features
 
