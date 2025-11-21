@@ -20,6 +20,9 @@ Es enthält Herausforderungen aus dem Netzwerk- und Rechenzentrumsbetrieb, die E
 ## Installation
 
 1. Repo als ZIP herunterladen und entpacken
+
+<img width="415" height="345" alt="Bildschirmfoto 2025-11-21 um 11 51 03" src="https://github.com/user-attachments/assets/600488cf-1757-420d-b41e-4e4570b6300b" />
+
 2. Optional: Ausführungsrichtlinien anpassen, falls das Skript blockiert wird:
    ```powershell
    Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
