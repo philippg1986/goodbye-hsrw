@@ -27,4 +27,8 @@ Es enthält Herausforderungen aus dem Netzwerk- und Rechenzentrumsbetrieb, Entsc
 ## Nutzung
 1. Powershell öffnen
 2. In das Script-Verzeichnis wechseln
-3. .\goodbye.ps1 ausführen
+   ```powershell
+   cd Ordnerpfad
+3. Das Script ausführen
+   ```powershell
+   .\goodbye.ps1
